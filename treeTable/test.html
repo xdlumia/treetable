@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="menuTreeTable"></div>
+
+<script type="text/html" id="menuHandle">
+  <i title="编辑菜单">编辑菜单</i>
+  <i title="删除菜单">删除菜单</i>
+</script>
+
+
+<script type="text/x-handlebars-template" id="menuTypeHandle">
+  <%if (id==1) {%>
+    <div class="layui-btn layui-btn-mini layui-btn-danger">目录</div>
+   <%}else if (id==2) {%>
+    <div class="layui-btn layui-btn-mini">菜单</div>
+   <%}else{%>
+    <div class="layui-btn layui-btn-mini layui-btn-normal">按钮</div>
+   <%}%>
+</script>
+
+<link rel="stylesheet" href="css/treetable.css">
+<link rel="stylesheet" href="http://at.alicdn.com/t/font_468662_40qd69d5x8qwipb9.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/template.js"></script>
+<script type="text/javascript" src="js/treetable.js"></script>
+<script type="text/javascript">
+var node = [ //节点
+      {
+        name: '常用文件夹'
+        ,id: 1
+        ,alias: 'changyong'
+        ,children: [
+          {
+            name: '所有未读（设置跳转）'
+            ,id: 11
+            ,href: 'http://www.layui.com/'
+            ,alias: 'weidu'
+          }, {
+            name: '置顶邮件'
+            ,id: 12
+          }, {
+            name: '标签邮件'
+            ,id: 13
+          }
+        ]
+      }, {
+        name: '我的邮箱'
+        ,id: 2
+        ,spread: true
+        ,children: [
+          {
+            name: 'QQ邮箱'
+            ,id: 21
+            ,spread: true
+            ,children: [
+              {
+                name: '收件箱'
+                ,id: 211
+                ,children: [
+                  {
+                    name: '所有未读'
+                    ,id: 2111
+                  }, {
+                    name: '置顶邮件'
+                    ,id: 2112
+                  }, {
+                    name: '标签邮件'
+                    ,id: 2113
+                  }
+                ]
+              }, {
+                name: '已发出的邮件'
+                ,id: 212
+              }, {
+                name: '垃圾邮件'
+                ,id: 213
+              }
+            ]
+          }, {
+            name: '阿里云邮'
+            ,id: 22
+            ,children: [
+              {
+                name: '收件箱'
+                ,id: 221
+              }, {
+                name: '已发出的邮件'
+                ,id: 222
+              }, {
+                name: '垃圾邮件'
+                ,id: 223
+              }
+            ]
+          }
+        ]
+      }
+      ,{
+        name: '收藏夹'
+        ,id: 3
+        ,alias: 'changyong'
+        ,children: [
+          {
+            name: '爱情动作片'
+            ,id: 31
+            ,alias: 'love'
+          }, {
+            name: '技术栈'
+            ,id: 12
+            ,children: [
+              {
+                name: '前端'
+                ,id: 121
+              }
+              ,{
+                name: '全端'
+                ,id: 122
+              }
+            ]
+          }
+        ]
+      }
+    ]
+treetableTabel({
+  elem:'#menuTreeTable'
+  ,data:node
+  ,check:"checkbox"
+  ,width:500
+  ,cols: [
+      {field:'name', title: '名称',align:'left', width:200, fixed: true}
+      ,{field:'id', title: '资源路径',align:'center', width:280}
+      ,{templet:'#menuTypeHandle', title: '类型',align:'center', width:180,}
+      ,{templet:'#menuHandle', title: '操作',align:'center', width:80,}
+    ]
+})
+
+$(document).on('click','.layui-btn',function(){
+	var that = $(this)
+	data = item(that) //获取数据
+	console.log(data)
+})
+</script>
+</script>
+</body>
+</html>
